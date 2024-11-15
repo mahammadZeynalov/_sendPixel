@@ -5,6 +5,7 @@ import { useGET } from "../hooks/useServer";
 import { useSendTransaction } from "wagmi";
 import { backendUrl, supportedChains } from "../config";
 import { ICanvas } from "../models";
+import Pixel from "./Pixel";
 
 interface PixelsContainerProps {
   width: number;
@@ -189,7 +190,13 @@ const Canvas = () => {
               ref={pixelsContainerRef}
             >
               {pixels.map((pixel) => (
-                <div>Pixel</div>
+                <Pixel
+                  key={pixel._id}
+                  pixelData={pixel}
+                  onConstructEth={onConstructEth}
+                  activePixelId={activePixelId}
+                  setActivePixelId={setActivePixelId}
+                />
               ))}
             </PixelsContainer>
             {/* Go Back button */}

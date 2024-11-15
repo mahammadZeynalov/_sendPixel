@@ -6,6 +6,7 @@ import { CircularLoader } from "./Loader";
 import { FilterMode } from "../pages/Canvases";
 import { useAccount } from "wagmi";
 import { ICanvas } from "../models";
+import CanvasCard from "./CanvasCard";
 
 interface IProps {
   filterMode: FilterMode;
@@ -64,7 +65,21 @@ const CanvasCards: React.FC<IProps> = ({ filterMode, selectedChainId }) => {
             chainId,
             creationTime,
             isFunded,
-          }) => <div>Canvas</div>
+          }) => (
+            <CanvasCard
+              key={canvasId}
+              canvasId={canvasId}
+              name={name}
+              owner={owner}
+              width={width}
+              height={height}
+              worldIdVerified={worldIdVerified}
+              destination={destination}
+              chainId={chainId}
+              creationTime={creationTime}
+              isFunded={isFunded}
+            />
+          )
         )
       )}
     </div>
