@@ -1,5 +1,9 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Canvas from "./components/Canvas";
 import styled from "styled-components";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
+import Root from "./pages/Root";
+import Canvases from "./pages/Canvases";
 
 const CanvasContainer = styled.div`
   display: flex;
@@ -12,16 +16,16 @@ const CanvasContainer = styled.div`
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div></div>,
+    element: <Root />,
     children: [
       {
         //@ts-ignore
         index: "true",
-        element: <div></div>,
+        element: <Canvases />,
       },
       {
         path: "canvas/:canvasId",
-        element: <div></div>,
+        element: <Canvas />,
       },
     ],
   },
