@@ -1,5 +1,6 @@
 import { http } from "@wagmi/core";
 import { createConfig } from "@wagmi/core";
+import Web3AuthConnectorInstance from "./Web3AuthConnectorInstance";
 import { defineChain } from "viem";
 
 export const backendUrl: string = import.meta.env.VITE_PUBLIC_BACKEND_URL;
@@ -92,5 +93,5 @@ const transports = supportedChains.reduce((acc, chain) => {
 export const config = createConfig({
   chains: supportedChains as any,
   transports,
-  connectors: [],
+  connectors: [Web3AuthConnectorInstance(supportedChains)],
 });
