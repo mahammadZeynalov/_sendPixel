@@ -3,6 +3,7 @@ import * as s from "./CanvasesStyles";
 import Modal from "../components/Modal";
 import { supportedChains } from "../config";
 import { useOutletContext } from "react-router-dom";
+import CanvasCards from "../components/CanvasCards";
 
 export enum FilterMode {
   ALL = "ALL",
@@ -67,7 +68,7 @@ const Canvases = () => {
           </s.SubTab>
         ))}
       </s.SubTabsWrapper>
-      <div>Canvases</div>
+      <CanvasCards filterMode={filterMode} selectedChainId={selectedChainId} />
       {showModal && <Modal toggle={toggleModal} />}
     </div>
   );
