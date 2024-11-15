@@ -1,5 +1,5 @@
 import { useAccount } from "wagmi";
-import { contractAbi, DEPLOYER_CONTRACT_ADDRESSES } from "../../common";
+import { contractAbi, DEPLOYER_CONTRACT_ADDRESSES } from "../common";
 import { useWriteContract } from "wagmi";
 
 const useWrite = () => {
