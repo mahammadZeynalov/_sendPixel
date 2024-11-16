@@ -1,10 +1,7 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useCallback, useState } from "react";
 import styled from "styled-components";
 import { SketchPicker } from "react-color";
 import { PixelItem } from "./Canvas";
-import { Tooltip } from "react-tooltip";
-import { supportedChains } from "../config";
-import { useAccount } from "wagmi";
 
 interface ColorProps {
   $color: {
@@ -38,15 +35,6 @@ const PaletteContainer = styled.div`
   border-radius: 5px;
 `;
 
-const ColorConfirmerBtn = styled.div`
-  background-color: #f0f0f0;
-  border: none;
-  padding: 10px;
-  width: auto;
-  border-radius: 5px;
-  cursor: pointer;
-`;
-
 interface IProps {
   pixelData: PixelItem;
   onConstructEth: (
@@ -61,44 +49,47 @@ interface IProps {
   isPixelTransactionPending: boolean;
 }
 
-const Pixel: React.FC<IProps> = ({
-  pixelData,
-  onConstructEth,
-  activePixelId,
-  setActivePixelId,
-  isPixelTransactionPending,
-}) => {
-  const [color, setColor] = useState(pixelData.color);
+const Pixel: React.FC<IProps> = React.memo(
+  ({
+    pixelData,
+    onConstructEth,
+    activePixelId,
+    setActivePixelId,
+    isPixelTransactionPending,
+  }) => {
+    const [color, setColor] = useState(pixelData.color);
 
-  const handleChange = (newColor) => {
-    setColor(newColor.rgb);
-  };
+    const handleChange = useCallback((newColor) => {
+      setColor(newColor.rgb);
+    }, []);
 
-  const handlePropagation = (e) => e.stopPropagation();
-  const handleConfirm = () => {
-    console.log("Confirming color change...", color);
-    onConstructEth(pixelData.x, pixelData.y, color.r, color.g, color.b);
-  };
+    const handlePropagation = useCallback((e) => e.stopPropagation(), []);
 
-  const { chainId: accountChainId } = useAccount();
-  const chain = supportedChains.find((c) => c.id === accountChainId);
-  const explorerUrl = chain?.blockExplorers?.default?.blockscoutUrl || "";
-  const fullUrl = `${explorerUrl}address/${pixelData.owner}`;
+    const handleConfirm = useCallback(() => {
+      onConstructEth(pixelData.x, pixelData.y, color.r, color.g, color.b);
+    }, [color, onConstructEth, pixelData]);
 
-  return (
-    <>
+    const isActive = activePixelId === pixelData._id;
+
+    return (
       <PixelContainer
         $color={color}
         onClick={() => setActivePixelId(pixelData._id!)}
-        data-tooltip-id={`tooltip-${pixelData._id}`} // Add tooltip ID
-        data-tooltip-html={
-          pixelData.owner
-            ? `<a href=${fullUrl} target="_blank">Last owner: ${pixelData.owner}</a>`
-            : "Last owner: N/A"
-        }
       >
-        {activePixelId === pixelData._id && (
+        {isActive && (
           <PaletteContainer onClick={handlePropagation}>
+            <div
+              style={{
+                color: "white",
+                fontSize: "8px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <div>Last owner:</div>
+              <div>{pixelData?.owner || "none"}</div>
+            </div>
             <SketchPicker color={color} onChange={handleChange} />
             <button
               className="btn btn-primary"
@@ -110,20 +101,8 @@ const Pixel: React.FC<IProps> = ({
           </PaletteContainer>
         )}
       </PixelContainer>
-
-      <Tooltip
-        clickable
-        id={`tooltip-${pixelData._id}`}
-        style={{
-          backgroundColor: "#333333", // Dark gray background
-          color: "#ffffff", // White text
-          padding: "8px", // Extra padding
-          borderRadius: "8px", // Rounded corners
-          fontSize: "0.9rem", // Slightly smaller font
-        }}
-      />
-    </>
-  );
-};
+    );
+  }
+);
 
 export default Pixel;
