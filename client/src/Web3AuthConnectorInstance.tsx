@@ -27,7 +27,7 @@ export default function Web3AuthConnectorInstance(chains: Chain[]) {
     privateKeyProvider,
     uiConfig: {
       appName: name,
-      loginMethodsOrder: ["github", "google"],
+      loginMethodsOrder: ["google", "github"],
       defaultLanguage: "en",
       modalZIndex: "2147483647",
       logoLight: "https://web3auth.io/images/web3authlog.png",
