@@ -192,9 +192,55 @@ const Canvas = () => {
             <div className="canvas-header mb-4">
               <div className="canvas-header-left">
                 <h1>{canvas.name}</h1>
-                <div>{canvas.owner}</div>
-                <div>
-                  {canvas.width}x{canvas.height}
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "40px",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <span style={{ fontSize: "16px" }}>Canvas creator:</span>
+                  <span style={{ fontWeight: "bold" }}>{canvas.owner}</span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "40px",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <span>Canvas resolution:</span>
+                  <span style={{ fontWeight: "bold" }}>
+                    {canvas.width}x{canvas.height}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "40px",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  Funding recipient:{" "}
+                  <span style={{ fontWeight: "bold" }}>
+                    {canvas.destination}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "40px",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <span>Deployed network:</span>
+                  <span style={{ fontWeight: "bold" }}>
+                    {
+                      supportedChains.find(
+                        (chain) => chain.id === canvas.chainId
+                      )?.name
+                    }
+                  </span>
                 </div>
                 <a href={fullUrl} target="_blank" rel="noopener noreferrer">
                   Explore history on BlockScout
