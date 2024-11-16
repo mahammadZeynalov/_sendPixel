@@ -63,16 +63,27 @@ const Canvases = () => {
           </s.SubTab>
         ))}
       </s.SubTabsWrapper>
-      <CanvasCards filterMode={filterMode} selectedChainId={selectedChainId} />
       <div
-        style={{ display: "flex", width: "100%", justifyContent: "center" }}
-        className="mt-4"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
       >
-        {address && (
-          <button className="btn btn-warning" onClick={toggleModal}>
-            Create New Canvas
-          </button>
-        )}
+        <CanvasCards
+          filterMode={filterMode}
+          selectedChainId={selectedChainId}
+        />
+        <div
+          style={{ display: "flex", width: "100%", justifyContent: "center" }}
+          className="mt-4"
+        >
+          {address && (
+            <button className="btn btn-warning" onClick={toggleModal}>
+              Create New Canvas
+            </button>
+          )}
+        </div>
       </div>
 
       {showModal && <Modal toggle={toggleModal} />}

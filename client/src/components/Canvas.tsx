@@ -23,6 +23,9 @@ const PixelsContainer = styled.div<PixelsContainerProps>`
   gap: 1px;
   aspect-ratio: 1;
   background-color: black;
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
 `;
 
 export interface PixelItem {
