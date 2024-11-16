@@ -2,7 +2,7 @@ import blockSyncService from "./blockSyncService.js";
 import eventService from "./eventService.js";
 import { contractAbi } from "../common.js";
 import { chainsConfig } from "../config.js";
-import { createPublicClient, http, webSocket } from "viem";
+import { createPublicClient, http } from "viem";
 
 // Helper function to create an HTTP client for a given chain
 const createHttpClient = (chain, rpc) =>
@@ -12,11 +12,12 @@ const createHttpClient = (chain, rpc) =>
   });
 
 // Helper function to create a WebSocket client for a given chain
-const createWebSocketClient = (chain, rpc) =>
-  createPublicClient({
+const createWebSocketClient = (chain, rpc) => {
+  return createPublicClient({
     chain,
     transport: http(rpc),
   });
+};
 
 // Helper function to check if the log is new
 const isNewLog = (log, lastProcessedEvent) => {
@@ -36,11 +37,11 @@ const isNewLog = (log, lastProcessedEvent) => {
 };
 
 // Function to process logs
-const processLog = async (log, events, contractAddress, chain) => {
+const processLog = async (log, events, contractAddress, chain, rpc) => {
   const event = events.find((e) => e.eventName === log.eventName);
 
   if (event && event.handleEvent) {
-    await event.handleEvent(log, chain);
+    await event.handleEvent(log, chain, rpc);
 
     await blockSyncService.updateLastProcessedEvent({
       contractAddress,
@@ -79,7 +80,7 @@ const fetchMissedEvents = async (
     for (const log of logs) {
       if (isNewLog(log, lastProcessedEvent)) {
         console.log(`Processing missed event log on ${chain.name}:`, log);
-        await processLog(log, events, contractAddress, chain);
+        await processLog(log, events, contractAddress, chain, rpc);
       } else {
         console.log(`Skipping already processed log on ${chain.name}:`, log);
       }
@@ -137,7 +138,7 @@ const checkPastThenWatch = async (
             await blockSyncService.getLastProcessedEvent(contractAddress);
           for (const log of logs) {
             if (isNewLog(log, lastProcessedEvent)) {
-              await processLog(log, events, contractAddress, chain);
+              await processLog(log, events, contractAddress, chain, rpc);
             }
           }
         } catch (error) {

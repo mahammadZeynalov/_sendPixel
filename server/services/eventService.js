@@ -66,7 +66,7 @@ const handleFundsTransferred = async (log) => {
     };
     await canvasService.transferFunds(data);
   } catch (error) {
-    console.error("Error in handleRegisterPixel:", error.message);
+    console.error("Error in handleFundsTransferred:", error.message);
   }
 };
 
