@@ -1,8 +1,21 @@
-import { holesky, sepolia } from "./config";
+import {
+  holesky,
+  sepolia,
+  celoAlfajores,
+  baseSepolia,
+  lineaSepolia,
+  scrollSepolia,
+} from "./config";
 
 export const DEPLOYER_CONTRACT_ADDRESSES = {
   [holesky.id]: import.meta.env.VITE_PUBLIC_DEPLOYER_ADDRESS_HOLESKY,
   [sepolia.id]: import.meta.env.VITE_PUBLIC_DEPLOYER_ADDRESS_SEPOLIA,
+  [celoAlfajores.id]: import.meta.env
+    .VITE_PUBLIC_DEPLOYER_ADDRESS_CELO_ALFAJORES,
+  [baseSepolia.id]: import.meta.env.VITE_PUBLIC_DEPLOYER_ADDRESS_BASE_SEPOLIA,
+  [lineaSepolia.id]: import.meta.env.VITE_PUBLIC_DEPLOYER_ADDRESS_LINEA_SEPOLIA,
+  [scrollSepolia.id]: import.meta.env
+    .VITE_PUBLIC_DEPLOYER_ADDRESS_SCROLL_SEPOLIA,
 };
 
 export const contractAbi = [

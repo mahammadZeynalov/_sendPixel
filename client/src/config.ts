@@ -53,6 +53,7 @@ export const sepolia = /*#__PURE__*/ defineChain({
 
 export const celoAlfajores = /*#__PURE__*/ defineChain({
   ...celoAlfajoresDefault,
+  name: "Celo",
   rpcUrls: {
     default: {
       http: [`https://alfajores-forno.celo-testnet.org`],
@@ -70,6 +71,7 @@ export const celoAlfajores = /*#__PURE__*/ defineChain({
 
 export const baseSepolia = /*#__PURE__*/ defineChain({
   ...baseSepoliaDefault,
+  name: "Base",
   rpcUrls: {
     default: {
       http: [`https://base-sepolia.g.alchemy.com/v2/${alchemyApiKey}`],
@@ -78,7 +80,7 @@ export const baseSepolia = /*#__PURE__*/ defineChain({
   blockExplorers: {
     default: {
       name: "Etherscan",
-      url: "https://sepolia.etherscan.io",
+      url: "https://base-sepolia.blockscout.com/",
       apiUrl: "https://api-sepolia.etherscan.io/api",
       blockscoutUrl: "https://base-sepolia.blockscout.com/",
     },
@@ -87,6 +89,7 @@ export const baseSepolia = /*#__PURE__*/ defineChain({
 
 export const lineaSepolia = /*#__PURE__*/ defineChain({
   ...lineaSepoliaDefault,
+  name: "Linea",
   rpcUrls: {
     default: {
       http: [`https://linea-sepolia.g.alchemy.com/v2/${alchemyApiKey}`],
@@ -104,6 +107,7 @@ export const lineaSepolia = /*#__PURE__*/ defineChain({
 
 export const scrollSepolia = /*#__PURE__*/ defineChain({
   ...scrollSepoliaDefault,
+  name: "Scroll",
   rpcUrls: {
     default: {
       http: [`https://scroll-sepolia.g.alchemy.com/v2/${alchemyApiKey}`],
@@ -119,7 +123,14 @@ export const scrollSepolia = /*#__PURE__*/ defineChain({
   },
 });
 
-export const supportedChains = [holesky, sepolia];
+export const supportedChains = [
+  holesky,
+  sepolia,
+  celoAlfajores,
+  baseSepolia,
+  lineaSepolia,
+  scrollSepolia,
+];
 const transports = supportedChains.reduce((acc, chain) => {
   acc[chain.id] = http();
   return acc;

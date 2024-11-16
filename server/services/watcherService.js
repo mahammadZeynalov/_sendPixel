@@ -2,7 +2,7 @@ import blockSyncService from "./blockSyncService.js";
 import eventService from "./eventService.js";
 import { contractAbi } from "../common.js";
 import { chainsConfig } from "../config.js";
-import { createPublicClient, http } from "viem";
+import { createPublicClient, http, webSocket } from "viem";
 
 // Helper function to create an HTTP client for a given chain
 const createHttpClient = (chain, rpc) =>
