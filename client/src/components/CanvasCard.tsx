@@ -21,6 +21,7 @@ const CanvasCard = ({
   chainId: canvasChainId,
   creationTime,
   isFunded,
+  nounImageId,
 }) => {
   const navigate = useNavigate();
   const { address, chainId: accountChainId } = useAccount();
@@ -100,6 +101,9 @@ const CanvasCard = ({
 
   return (
     <s.Card>
+      <div>
+        <img src={`https://noun.pics/${nounImageId}`} />
+      </div>
       <s.NameIdEditWrapper>
         <s.NameIdWrapper>
           <s.Name>{name}</s.Name>

@@ -190,15 +190,25 @@ const Canvas = () => {
         canvas && (
           <>
             <div className="canvas-header mb-4">
-              <h1>{canvas.name}</h1>
-              <div>{canvas.owner}</div>
-              <div>
-                {canvas.width}x{canvas.height}
+              <div className="canvas-header-left">
+                <h1>{canvas.name}</h1>
+                <div>{canvas.owner}</div>
+                <div>
+                  {canvas.width}x{canvas.height}
+                </div>
+                <a href={fullUrl} target="_blank" rel="noopener noreferrer">
+                  Explore history on BlockScout
+                </a>
               </div>
-              <a href={fullUrl} target="_blank" rel="noopener noreferrer">
-                Explore history on BlockScout
-              </a>
+              <div className="canvas-header-right">
+                <div>Recommended image:</div>
+                <img
+                  src={`https://noun.pics/${canvas.nounImageId}`}
+                  style={{ width: "200px" }}
+                />
+              </div>
             </div>
+
             <PixelsContainer
               width={canvas.width}
               height={canvas.height}

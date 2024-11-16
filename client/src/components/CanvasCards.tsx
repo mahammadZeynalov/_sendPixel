@@ -65,6 +65,7 @@ const CanvasCards: React.FC<IProps> = ({ filterMode, selectedChainId }) => {
             chainId,
             creationTime,
             isFunded,
+            nounImageId,
           }) => (
             <CanvasCard
               key={`${canvasId}-${name}-${owner}-${width}-${height}`}
@@ -78,6 +79,7 @@ const CanvasCards: React.FC<IProps> = ({ filterMode, selectedChainId }) => {
               chainId={chainId}
               creationTime={creationTime}
               isFunded={isFunded}
+              nounImageId={nounImageId}
             />
           )
         )

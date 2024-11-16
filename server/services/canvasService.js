@@ -39,6 +39,7 @@ const initializeCanvas = async ({
       pixels: [],
       destination,
       creationTime,
+      nounImageId: Math.floor(Math.random() * 1000) + 1,
     });
 
     await newCanvas.save();

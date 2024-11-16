@@ -28,4 +28,5 @@ export interface ICanvas {
   creationTime: number;
   totalAmount: string;
   isFunded: boolean;
+  nounImageId: number;
 }

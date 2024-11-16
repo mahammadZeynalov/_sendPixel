@@ -31,6 +31,7 @@ const CanvasSchema = new Schema({
   creationTime: { type: Number, required: true },
   totalAmount: { type: String, required: false },
   isFunded: { type: Boolean, default: false },
+  nounImageId: { type: Number, required: true },
   pixels: [PixelSchema],
 });
 
