@@ -72,4 +72,8 @@ router.get("/test-insert", async (_, res) => {
   }
 });
 
+router.get("/test", (_, res) => {
+  res.status(200).json({ message: "Bye World!" });
+});
+
 export default router;
