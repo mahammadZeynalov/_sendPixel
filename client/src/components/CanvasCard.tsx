@@ -127,7 +127,7 @@ const CanvasCard = ({
       </s.PropsWrapper>
       {worldIdVerified ? (
         <span
-          className="badge rounded-pill bg-secondary"
+          className="badge rounded-pill bg-success"
           style={{
             display: "flex",
             alignItems: "center",
