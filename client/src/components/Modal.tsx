@@ -66,20 +66,25 @@ const Input = styled.input`
 `;
 
 const Modal = ({ toggle }) => {
-  const [name, setName] = useState("");
-  const [height, setHeight] = useState(0);
-  const [width, setWidth] = useState(0);
-  const [destinationAddress, setDestinationAddress] = useState<string>("");
   const { chainId: accountChainId } = useAccount();
   const { user, isSubscribed } = usePushNotifications();
-
   const {
     writeAsync,
     hash: hashInitializeCanvas,
     isHashPending: initializeCanvasIsHashPending,
   } = useWrite();
 
-  // Handle canvas initialization (Step 1)
+  const [name, setName] = useState("");
+  const [height, setHeight] = useState(0);
+  const [width, setWidth] = useState(0);
+  const [destinationAddress, setDestinationAddress] = useState<string>("");
+
+  const isNetworkSupported = supportedChains.some(
+    (chain) => chain.id === accountChainId
+  );
+  const isFormValid =
+    name && height && width && isNetworkSupported && destinationAddress;
+
   const handleInitializeCanvas = async () => {
     const hash = await writeAsync(
       "deployCanvas",
@@ -88,12 +93,11 @@ const Modal = ({ toggle }) => {
     );
     toggle();
 
-    {
-      isSubscribed &&
-        notification(
-          user,
-          `Wallet ${user.account} created "${name}" (${width}x${height})`
-        );
+    if (isSubscribed) {
+      notification(
+        user,
+        `Wallet ${user.account} created "${name}" (${width}x${height})`
+      );
     }
 
     const chain = supportedChains.find(
@@ -132,13 +136,6 @@ const Modal = ({ toggle }) => {
     console.log("chain id", accountChainId);
   }, [accountChainId]);
 
-  const isNetworkSupported = supportedChains.some(
-    (chain) => chain.id === accountChainId
-  );
-
-  const isFormValid =
-    name && height && width && isNetworkSupported && destinationAddress;
-
   return (
     <Overlay onClick={toggle}>
       <ModalContainer
@@ -146,7 +143,7 @@ const Modal = ({ toggle }) => {
           e.stopPropagation();
         }}
       >
-        <Title>Generate Interactive Canvas</Title>
+        <Title>Canvas Parameters</Title>
         <InputContainer>
           <Label>Canvas Name</Label>
           <Input
