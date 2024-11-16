@@ -11,6 +11,7 @@ import { CONSTANTS, PushAPI } from "@pushprotocol/restapi";
 import { groupChatId } from "../config";
 import { usePrivy, useLogout } from "@privy-io/react-auth";
 import { enqueueSnackbar } from "notistack";
+import logo from "../assets/logo.svg";
 
 const Root = () => {
   const { address } = useAccount();
@@ -74,8 +75,7 @@ const Root = () => {
       <div className="nav-bar-container mb-4">
         <div className="nav-bar-container-logo">
           <a className="nav-bar-container-logo-link" href="/">
-            LOGO
-            {/* <img src={logoSideText} height="65px" alt="Logo" /> */}
+            <img src={logo} height="65px" alt="Logo" />
           </a>
         </div>
         <div className="nav-bar-container-info">
