@@ -41,7 +41,7 @@ const POST = async (endpoint, data) => {
 const usePOST = (endpoint, options) => {
   return useMutation({
     mutationFn: (data) => POST(endpoint, data),
-    ...options, // Optional additional options such as onSuccess, onError, etc.
+    ...options,
   });
 };
 
