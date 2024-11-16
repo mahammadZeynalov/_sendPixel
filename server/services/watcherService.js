@@ -5,17 +5,17 @@ import { chainsConfig } from "../config.js";
 import { createPublicClient, http } from "viem";
 
 // Helper function to create an HTTP client for a given chain
-const createHttpClient = (chain) =>
+const createHttpClient = (chain, rpc) =>
   createPublicClient({
     chain,
-    transport: http(),
+    transport: http(rpc),
   });
 
 // Helper function to create a WebSocket client for a given chain
-const createWebSocketClient = (chain) =>
+const createWebSocketClient = (chain, rpc) =>
   createPublicClient({
     chain,
-    transport: http(),
+    transport: http(rpc),
   });
 
 // Helper function to check if the log is new
@@ -54,6 +54,7 @@ const processLog = async (log, events, contractAddress, chain) => {
 // Function to fetch missed events for a specific contract on a specific chain
 const fetchMissedEvents = async (
   chain,
+  rpc,
   contractAddress,
   contractAbi,
   events,
@@ -61,7 +62,7 @@ const fetchMissedEvents = async (
   toBlock
 ) => {
   try {
-    const clientHttp = createHttpClient(chain);
+    const clientHttp = createHttpClient(chain, rpc);
     const logs = await clientHttp.getContractEvents({
       address: contractAddress,
       abi: contractAbi,
@@ -94,14 +95,15 @@ const fetchMissedEvents = async (
 // Function to watch and sync events for a specific contract on a specific chain
 const checkPastThenWatch = async (
   chain,
+  rpc,
   contractAddress,
   contractAbi,
   events
 ) => {
   console.log("chain: ", chain.id);
   try {
-    const clientHttp = createHttpClient(chain);
-    const clientWebSocket = createWebSocketClient(chain);
+    const clientHttp = createHttpClient(chain, rpc);
+    const clientWebSocket = createWebSocketClient(chain, rpc);
 
     const lastProcessedEvent = await blockSyncService.getLastProcessedEvent(
       contractAddress
@@ -112,6 +114,7 @@ const checkPastThenWatch = async (
       const fromBlock = BigInt(lastProcessedEvent.lastBlockNumber);
       await fetchMissedEvents(
         chain,
+        rpc,
         contractAddress,
         contractAbi,
         events,
@@ -160,8 +163,14 @@ const startDeployerWatcher = async () => {
   ];
 
   try {
-    for (const { chain, contractAddress } of chainsConfig) {
-      await checkPastThenWatch(chain, contractAddress, contractAbi, events);
+    for (const { chain, rpc, contractAddress } of chainsConfig) {
+      await checkPastThenWatch(
+        chain,
+        rpc,
+        contractAddress,
+        contractAbi,
+        events
+      );
     }
   } catch (error) {
     console.error("Failed to start event watcher:", error);

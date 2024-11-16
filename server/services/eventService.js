@@ -2,7 +2,7 @@ import { canvasContractAbi } from "../common.js";
 import canvasService from "../services/canvasService.js";
 import watcherService from "./watcherService.js";
 
-const handleInitializeCanvas = async (log, chain) => {
+const handleInitializeCanvas = async (log, chain, rpc) => {
   console.log("Handling InitializeCanvas event");
   try {
     const canvasData = {
@@ -27,6 +27,7 @@ const handleInitializeCanvas = async (log, chain) => {
 
     await watcherService.checkPastThenWatch(
       chain,
+      rpc,
       canvasData.canvasId,
       canvasContractAbi,
       [{ eventName: "PixelRegistered", handleEvent: handleRegisterPixel }]
@@ -34,6 +35,7 @@ const handleInitializeCanvas = async (log, chain) => {
 
     await watcherService.checkPastThenWatch(
       chain,
+      rpc,
       canvasData.canvasId,
       canvasContractAbi,
       [{ eventName: "FundsTransferred", handleEvent: handleFundsTransferred }]
