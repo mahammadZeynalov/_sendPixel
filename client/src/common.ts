@@ -1,3 +1,4 @@
+import { morphHolesky } from "viem/chains";
 import {
   holesky,
   sepolia,
@@ -16,6 +17,7 @@ export const DEPLOYER_CONTRACT_ADDRESSES = {
   [lineaSepolia.id]: import.meta.env.VITE_PUBLIC_DEPLOYER_ADDRESS_LINEA_SEPOLIA,
   [scrollSepolia.id]: import.meta.env
     .VITE_PUBLIC_DEPLOYER_ADDRESS_SCROLL_SEPOLIA,
+  [morphHolesky.id]: import.meta.env.VITE_PUBLIC_DEPLOYER_ADDRESS_MORPH_HOLESKY,
 };
 
 export const contractAbi = [

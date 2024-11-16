@@ -12,6 +12,7 @@ import {
   baseSepolia as baseSepoliaDefault,
   lineaSepolia as lineaSepoliaDefault,
   scrollSepolia as scrollSepoliaDefault,
+  morphHolesky as morphHoleskyDefault,
 } from "@wagmi/core/chains";
 
 export const backendUrl: string = import.meta.env.VITE_PUBLIC_BACKEND_URL;
@@ -123,6 +124,19 @@ export const scrollSepolia = /*#__PURE__*/ defineChain({
   },
 });
 
+export const morphHolesky = /*#__PURE__*/ defineChain({
+  ...morphHoleskyDefault,
+  name: "Morph",
+  blockExplorers: {
+    default: {
+      name: "Morph Holesky Explorer",
+      url: "https://explorer-holesky.morphl2.io",
+      apiUrl: "https://explorer-api-holesky.morphl2.io/api?",
+      blockscoutUrl: "https://explorer-holesky.morphl2.io/",
+    },
+  },
+});
+
 export const supportedChains = [
   holesky,
   sepolia,
@@ -130,6 +144,7 @@ export const supportedChains = [
   baseSepolia,
   lineaSepolia,
   scrollSepolia,
+  morphHolesky,
 ];
 const transports = supportedChains.reduce((acc, chain) => {
   acc[chain.id] = http();

@@ -7,6 +7,7 @@ import {
   baseSepolia,
   lineaSepolia,
   scrollSepolia,
+  morphHolesky,
 } from "viem/chains";
 
 dotenv.config({ path: "./.env" });
@@ -43,5 +44,10 @@ export const chainsConfig = [
     chain: scrollSepolia,
     rpc: `https://scroll-sepolia.g.alchemy.com/v2/${alchemyApiKey}`,
     contractAddress: process.env.DEPLOYER_ADDRESS_SCROLL_SEPOLIA,
+  },
+  {
+    chain: morphHolesky,
+    rpc: `https://rpc-quicknode-holesky.morphl2.io`,
+    contractAddress: process.env.DEPLOYER_ADDRESS_MORPH_HOLESKY,
   },
 ];
