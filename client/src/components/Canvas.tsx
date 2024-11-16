@@ -6,6 +6,10 @@ import { useSendTransaction } from "wagmi";
 import { backendUrl, supportedChains } from "../config";
 import { ICanvas } from "../models";
 import Pixel from "./Pixel";
+import {
+  notification,
+  usePushNotifications,
+} from "../utils/usePushNotifications";
 
 interface PixelsContainerProps {
   width: number;
@@ -40,6 +44,7 @@ const Canvas = () => {
   const navigate = useNavigate();
   const [activePixelId, setActivePixelId] = useState<number | null>(null);
   const pixelsContainerRef = useRef<HTMLDivElement>(null);
+  const { user, isSubscribed } = usePushNotifications();
 
   const { canvasId: paramCanvasId } = useParams();
   const [pixels, setPixels] = useState<PixelItem[]>([]);
@@ -143,6 +148,13 @@ const Canvas = () => {
       to: canvas.canvasId as `0x${string}`,
       value: BigInt(result),
     });
+    {
+      isSubscribed &&
+        notification(
+          user,
+          `Wallet ${user.account} colored canvas "${canvas.name}" to R${r} G${g} B${b} color at coordinates ${x}:${y}`
+        );
+    }
     return result;
   }
 

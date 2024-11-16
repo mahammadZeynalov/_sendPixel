@@ -95,3 +95,5 @@ export const config = createConfig({
   transports,
   connectors: [Web3AuthConnectorInstance(supportedChains)],
 });
+
+export const groupChatId = import.meta.env.VITE_PUBLIC_PUSH_GROUP_ADDRESS;
