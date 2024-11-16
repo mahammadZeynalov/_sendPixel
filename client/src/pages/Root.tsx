@@ -66,10 +66,6 @@ const Root = () => {
     }
   };
 
-  useEffect(() => {
-    console.log("isSubscribed: ", isSubscribed);
-  }, [isSubscribed]);
-
   return (
     <div
       className="container"

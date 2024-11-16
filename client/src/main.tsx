@@ -14,15 +14,15 @@ const queryClient = new QueryClient();
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <PrivyProvider appId={privyAppID} config={privyConfig}>
-      <QueryClientProvider client={queryClient}>
-        <WagmiProvider config={config}>
+      <WagmiProvider config={config}>
+        <QueryClientProvider client={queryClient}>
           <SnackbarProvider>
             <PushNotificationsProvider>
               <App />
             </PushNotificationsProvider>
           </SnackbarProvider>
-        </WagmiProvider>
-      </QueryClientProvider>
+        </QueryClientProvider>
+      </WagmiProvider>
     </PrivyProvider>
   </StrictMode>
 );
