@@ -9,6 +9,8 @@ import {
   notification,
   usePushNotifications,
 } from "../utils/usePushNotifications";
+import { getGasPrice } from "@wagmi/core";
+import { formatEther } from "viem";
 
 const Overlay = styled.div`
   position: fixed;
@@ -80,6 +82,9 @@ const Modal = ({ toggle }) => {
   const [destinationAddress, setDestinationAddress] = useState<string>(
     String(address)
   );
+  const [gasPricesMap, setGasPricesMap] = useState<Map<number, string>>(
+    new Map()
+  );
 
   const isNetworkSupported = supportedChains.some(
     (chain) => chain.id === accountChainId
@@ -138,6 +143,30 @@ const Modal = ({ toggle }) => {
     console.log("chain id", accountChainId);
   }, [accountChainId]);
 
+  useEffect(() => {
+    //@ts-ignore
+    allChainsGasPrices().then((data) => setGasPricesMap(data));
+  }, []);
+
+  const allChainsGasPrices = async () => {
+    const gasPricesData = await Promise.all(
+      supportedChains.map((chain) =>
+        getGasPrice(config, { chainId: chain.id }).then((price) => ({
+          chainId: chain.id,
+          price,
+        }))
+      )
+    );
+    const gasPricesMap = new Map<number, string>();
+    gasPricesData.forEach((data) => {
+      gasPricesMap.set(data.chainId, formatEther(data.price));
+    });
+    console.log("gasPricesMap", gasPricesMap);
+    return gasPricesMap;
+  };
+
+  console.log("gasPricesMap", gasPricesMap);
+
   return (
     <Overlay onClick={toggle}>
       <ModalContainer
@@ -191,8 +220,17 @@ const Modal = ({ toggle }) => {
               Network with chain ID: {accountChainId} is not supported
             </option>
             {supportedChains.map((chain) => (
-              <option key={chain.id} value={chain.id}>
-                {chain.name}
+              <option
+                key={chain.id}
+                value={chain.id}
+                style={{ display: "flex", justifyContent: "space-between" }}
+              >
+                <span>{chain.name}</span>{" "}
+                {gasPricesMap?.get(chain.id) && (
+                  <span style={{ float: "right" }}>
+                    (gas price: {gasPricesMap?.get(chain.id) || 0} ETH)
+                  </span>
+                )}
               </option>
             ))}
           </SelectBox>
