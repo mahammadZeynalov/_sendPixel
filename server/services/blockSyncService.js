@@ -7,7 +7,7 @@ const updateLastProcessedEvent = async ({
   logIndex,
 }) => {
   await BlockSync.findOneAndUpdate(
-    { contractAddress }, // Query by contract address
+    { contractAddress },
     {
       lastBlockNumber: blockNumber,
       lastTransactionHash: transactionHash,
