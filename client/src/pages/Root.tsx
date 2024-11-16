@@ -66,7 +66,10 @@ const Root = () => {
   };
 
   return (
-    <div className="container">
+    <div
+      className="container"
+      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+    >
       <div className="nav-bar-container mb-4">
         <div className="nav-bar-container-logo">
           <a className="nav-bar-container-logo-link" href="/">
@@ -107,9 +110,7 @@ const Root = () => {
         </div>
       </div>
 
-      <s.OutletContainer>
-        <Outlet context={{ address }} />
-      </s.OutletContainer>
+      <Outlet context={{ address }} />
 
       <s.FooterLinksContainer>
         <a

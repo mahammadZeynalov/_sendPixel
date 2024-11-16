@@ -183,7 +183,7 @@ const Canvas = () => {
   const fullUrl = `${explorerUrl}address/${canvas?.canvasId}`;
 
   return (
-    <div className="page-container">
+    <main className="page-container">
       {isPendingCanvas ? (
         <div>Loading...</div>
       ) : (
@@ -230,7 +230,7 @@ const Canvas = () => {
           </>
         )
       )}
-    </div>
+    </main>
   );
 };
 

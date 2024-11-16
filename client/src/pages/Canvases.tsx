@@ -25,7 +25,7 @@ const Canvases = () => {
   };
 
   return (
-    <div className="page-container">
+    <main className="page-container">
       <div className="tabs-wrapper mb-3">
         <s.Tab
           onClick={() => setFilterMode(FilterMode.ALL)}
@@ -70,7 +70,7 @@ const Canvases = () => {
       </s.SubTabsWrapper>
       <CanvasCards filterMode={filterMode} selectedChainId={selectedChainId} />
       {showModal && <Modal toggle={toggleModal} />}
-    </div>
+    </main>
   );
 };
 

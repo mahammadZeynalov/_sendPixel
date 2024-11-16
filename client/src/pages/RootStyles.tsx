@@ -1,10 +1,5 @@
 import styled from "styled-components";
 
-export const OutletContainer = styled.div`
-  flex: 1;
-  display: flex;
-`;
-
 export const FooterLinksContainer = styled.div`
   height: 50px;
   display: flex;
