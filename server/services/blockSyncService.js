@@ -18,7 +18,7 @@ const updateLastProcessedEvent = async ({
 };
 
 const getLastProcessedEvent = async (contractAddress) => {
-  const record = await BlockSync.findOne({ contractAddress }); // Query by contract address
+  const record = await BlockSync.findOne({ contractAddress });
   if (record) {
     return {
       lastBlockNumber: record.lastBlockNumber,
