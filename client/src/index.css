@@ -18,8 +18,6 @@ html {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden;
-  /* background-color: #373f68; */
 }
 
 .dynamic-shadow-dom {
