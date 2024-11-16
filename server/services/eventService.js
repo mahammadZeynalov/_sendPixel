@@ -25,19 +25,40 @@ const handleInitializeCanvas = async (log, chain) => {
       `Starting listener for new Canvas contract: ${canvasData.canvasId} on chainId: ${canvasData.chainId}`
     );
 
-    await watcherService.watchEvents(
+    await watcherService.checkPastThenWatch(
       chain,
       canvasData.canvasId,
       canvasContractAbi,
       [{ eventName: "PixelRegistered", handleEvent: handleRegisterPixel }]
+    );
+
+    await watcherService.checkPastThenWatch(
+      chain,
+      canvasData.canvasId,
+      canvasContractAbi,
+      [{ eventName: "FundsTransferred", handleEvent: handleFundsTransferred }]
     );
   } catch (error) {
     console.error("Error in handleInitializeCanvas:", error.message);
   }
 };
 
+const handleRegisterPixel = async (log) => {
+  try {
+    const pixelData = {
+      canvasId: log.args.contractAddress,
+      amount: log.args.amount.toString().padStart(18, "0"), // Ensure 18 digits,
+      sender: log.args.sender,
+    };
+    await canvasService.registerPixel(pixelData);
+  } catch (error) {
+    console.error("Error in handleRegisterPixel:", error.message);
+  }
+};
+
 const eventService = {
   handleInitializeCanvas,
+  handleRegisterPixel,
 };
 
 export default eventService;
