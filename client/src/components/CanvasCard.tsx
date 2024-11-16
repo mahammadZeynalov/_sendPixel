@@ -7,6 +7,8 @@ import { switchChain } from "@wagmi/core";
 import { config } from "../config";
 import { useEffect, useState } from "react";
 import { add, differenceInSeconds } from "date-fns";
+import WorldIdButton from "./WorldIdButton";
+import worldIdIcon from "../assets/world-id-logo.svg";
 
 const CanvasCard = ({
   canvasId,
@@ -159,6 +161,24 @@ const CanvasCard = ({
           </s.PropWrapper>
         )}
       </s.PropsWrapper>
+      {worldIdVerified ? (
+        <span
+          className="badge rounded-pill bg-secondary"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <img
+            src={worldIdIcon}
+            style={{ height: "15px", marginRight: "10px" }}
+          />
+          <span>World ID Verified</span>
+        </span>
+      ) : (
+        isOwner && <WorldIdButton canvasId={canvasId}></WorldIdButton>
+      )}
       {isBeneficiary && (
         <button className="btn btn-secondary" onClick={handleClaimTokens}>
           Claim tokens
