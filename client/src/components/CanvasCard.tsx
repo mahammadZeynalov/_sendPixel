@@ -72,7 +72,7 @@ const CanvasCard = ({
   };
 
   useEffect(() => {
-    const expirationDate = add(new Date(creationTime * 1000), { hours: 1 });
+    const expirationDate = add(new Date(creationTime * 1000), { hours: 12 });
 
     const updateTimer = () => {
       const secondsLeft = differenceInSeconds(expirationDate, new Date());
@@ -144,7 +144,7 @@ const CanvasCard = ({
         isOwner && <WorldIdButton canvasId={canvasId}></WorldIdButton>
       )}
       {isBeneficiary && (
-        <button className="btn btn-secondary" onClick={handleClaimTokens}>
+        <button className="btn btn-warning" onClick={handleClaimTokens}>
           Claim tokens
         </button>
       )}

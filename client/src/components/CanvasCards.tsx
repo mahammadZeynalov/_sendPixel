@@ -51,7 +51,7 @@ const CanvasCards: React.FC<IProps> = ({ filterMode, selectedChainId }) => {
       {isLoadingCanvases ? (
         <CircularLoader />
       ) : !canvases?.length ? (
-        <div>No canvases created yet</div>
+        <div style={{ color: "white" }}>No canvases created yet</div>
       ) : (
         displayedCanvases.map(
           ({

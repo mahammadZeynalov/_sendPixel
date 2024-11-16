@@ -107,7 +107,7 @@ const Root = () => {
                   </button>
                 )}
                 {isSubscribed && (
-                  <button className="btn btn-success">
+                  <button className="btn btn-warning">
                     🔔 Joined to channel!
                   </button>
                 )}

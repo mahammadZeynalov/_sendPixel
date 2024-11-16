@@ -49,7 +49,7 @@ const WorldIdButton = ({ canvasId }) => {
       verification_level={VerificationLevel.Orb}
     >
       {({ open }) => (
-        <button className="btn btn-secondary" onClick={open}>
+        <button className="btn btn-warning" onClick={open}>
           Verify with World ID
         </button>
       )}
