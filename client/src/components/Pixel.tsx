@@ -58,6 +58,7 @@ interface IProps {
   ) => void;
   activePixelId: number | null;
   setActivePixelId: Dispatch<SetStateAction<number | null>>;
+  isPixelTransactionPending: boolean;
 }
 
 const Pixel: React.FC<IProps> = ({
@@ -65,6 +66,7 @@ const Pixel: React.FC<IProps> = ({
   onConstructEth,
   activePixelId,
   setActivePixelId,
+  isPixelTransactionPending,
 }) => {
   const [color, setColor] = useState(pixelData.color);
 
@@ -87,9 +89,6 @@ const Pixel: React.FC<IProps> = ({
     <>
       <PixelContainer
         $color={color}
-        style={{
-          backgroundColor: activePixelId === pixelData._id ? "grey" : "white",
-        }}
         onClick={() => setActivePixelId(pixelData._id!)}
         data-tooltip-id={`tooltip-${pixelData._id}`} // Add tooltip ID
         data-tooltip-html={
@@ -101,7 +100,11 @@ const Pixel: React.FC<IProps> = ({
         {activePixelId === pixelData._id && (
           <PaletteContainer onClick={handlePropagation}>
             <SketchPicker color={color} onChange={handleChange} />
-            <button className="btn btn-primary" onClick={handleConfirm}>
+            <button
+              className="btn btn-primary"
+              onClick={handleConfirm}
+              disabled={isPixelTransactionPending}
+            >
               Confirm
             </button>
           </PaletteContainer>

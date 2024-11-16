@@ -41,7 +41,11 @@ const Canvas = () => {
   const { canvasId: paramCanvasId } = useParams();
   const navigate = useNavigate();
   const { user, isSubscribed } = usePushNotifications();
-  const { data: hash, sendTransaction } = useSendTransaction();
+  const {
+    data: hash,
+    sendTransaction,
+    isPending: isPixelTransactionPending,
+  } = useSendTransaction();
   const {
     isPending: isPendingCanvas,
     error: errorCanvas,
@@ -207,6 +211,7 @@ const Canvas = () => {
                   onConstructEth={onConstructEth}
                   activePixelId={activePixelId}
                   setActivePixelId={setActivePixelId}
+                  isPixelTransactionPending={isPixelTransactionPending}
                 />
               ))}
             </PixelsContainer>
