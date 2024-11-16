@@ -15,4 +15,6 @@ router.get(
   canvasController.getJoinedCanvases
 );
 
+router.get("/canvases/:canvasId", canvasController.getCanvas);
+
 export default router;

@@ -29,10 +29,26 @@ const getJoinedCanvases = async (req, res) => {
   }
 };
 
+const getCanvas = async (req, res) => {
+  try {
+    const { canvasId } = req.params;
+    const canvas = await canvasService.getCanvas(canvasId);
+
+    if (!canvas) {
+      return res.status(404).json({ message: "Canvas not found" });
+    }
+
+    res.status(200).json(canvas);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 const canvasController = {
   getAllCanvases,
   getGeneratedCanvases,
   getJoinedCanvases,
+  getCanvas,
 };
 
 export default canvasController;
