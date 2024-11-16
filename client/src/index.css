@@ -20,25 +20,6 @@ html {
   padding: 0;
 }
 
-.dynamic-shadow-dom {
-  --dynamic-connect-button-background: linear-gradient(
-    90deg,
-    rgba(29, 157, 155, 1) 0%,
-    rgba(10, 103, 122, 1) 100%
-  );
-  --dynamic-connect-button-color: #fff;
-  --dynamic-connect-button-color-hover: #fff;
-  --dynamic-connect-button-border: none;
-  --dynamic-connect-button-border-radius: 5px;
-  --dynamic-connect-button-background-hover: linear-gradient(
-    90deg,
-    rgba(37, 177, 175, 1) 0%,
-    rgba(18, 122, 143, 1) 100%
-  );
-  --dynamic-connect-button-width: 400px;
-  --dynamic-connect-button-padding: small;
-}
-
 .nav-bar-container {
   display: flex;
   justify-content: space-between;
