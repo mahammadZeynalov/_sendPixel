@@ -111,7 +111,6 @@ const CanvasCard = ({
           {width}x{height}
         </s.PropValue>
       </s.PropWrapper>
-
       <s.PropsWrapper>
         {isExpired ? (
           <s.PropWrapper>
@@ -150,7 +149,7 @@ const CanvasCard = ({
         </button>
       )}
       {isPlayable && (
-        <button className="btn btn-primary" onClick={handleNavigate}>
+        <button className="btn btn-warning" onClick={handleNavigate}>
           Enter
         </button>
       )}

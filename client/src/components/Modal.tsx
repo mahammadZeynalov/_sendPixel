@@ -195,7 +195,7 @@ const Modal = ({ toggle }) => {
         <SubmitBtnContainer>
           <button
             onClick={handleInitializeCanvas}
-            className="btn btn-primary"
+            className="btn btn-warning"
             type="button"
             disabled={initializeCanvasIsHashPending || !isFormValid}
           >

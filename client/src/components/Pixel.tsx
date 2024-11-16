@@ -92,7 +92,7 @@ const Pixel: React.FC<IProps> = React.memo(
             </div>
             <SketchPicker color={color} onChange={handleChange} />
             <button
-              className="btn btn-primary"
+              className="btn btn-warning"
               onClick={handleConfirm}
               disabled={isPixelTransactionPending}
             >

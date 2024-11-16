@@ -92,7 +92,7 @@ const Root = () => {
                 {!isSubscribed && (
                   <button
                     onClick={handleSubscribe}
-                    className="btn btn-primary"
+                    className="btn btn-warning"
                     type="button"
                     disabled={isSubscribtionLoading}
                   >
@@ -116,7 +116,7 @@ const Root = () => {
                   </button>
                 )}
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-warning"
                   onClick={() => {
                     disconnect();
                     try {
@@ -131,7 +131,7 @@ const Root = () => {
               </div>
             ) : (
               <s.ConnectWalletBtnWrapper>
-                <button className="btn btn-primary" onClick={handleLoginClick}>
+                <button className="btn btn-warning" onClick={handleLoginClick}>
                   Login
                 </button>
               </s.ConnectWalletBtnWrapper>
@@ -167,18 +167,18 @@ const Root = () => {
             >
               {connectors.map((connector) => (
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-warning"
                   key={connector.id}
                   onClick={() => connect({ connector })}
                 >
                   {connector.name}
                 </button>
               ))}
-              <button className="btn btn-primary" onClick={login}>
+              <button className="btn btn-warning" onClick={login}>
                 Privy
               </button>
             </div>
-            <button className="btn btn-primary" onClick={closeModal}>
+            <button className="btn btn-warning" onClick={closeModal}>
               Close
             </button>
           </s.ModalContainer>

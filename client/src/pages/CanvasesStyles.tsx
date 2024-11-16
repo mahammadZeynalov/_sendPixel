@@ -61,7 +61,7 @@ interface TabProps {
 }
 
 export const Tab = styled.div<TabProps>`
-  color: ${(props) => (props.$active ? "#085ed6" : "#777777")};
+  color: ${(props) => (props.$active ? "#ffc107" : "white")};
   font-size: 30px;
   font-weight: 500;
   cursor: pointer;

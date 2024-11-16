@@ -20,7 +20,7 @@ const PixelsContainer = styled.div<PixelsContainerProps>`
   display: grid;
   grid-template-columns: repeat(${(props) => props.width}, 1fr);
   grid-template-rows: repeat(${(props) => props.height}, 1fr);
-  gap: 2px;
+  gap: 1px;
   aspect-ratio: 1;
   background-color: black;
 `;
@@ -223,7 +223,7 @@ const Canvas = () => {
                 marginTop: "20px",
               }}
             >
-              <button className="btn btn-primary" onClick={() => navigate(-1)}>
+              <button className="btn btn-warning" onClick={() => navigate(-1)}>
                 Back to Canvases
               </button>
             </div>

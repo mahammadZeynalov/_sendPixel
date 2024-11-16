@@ -69,7 +69,7 @@ const Canvases = () => {
         className="mt-4"
       >
         {address && (
-          <button className="btn btn-primary" onClick={toggleModal}>
+          <button className="btn btn-warning" onClick={toggleModal}>
             Create New Canvas
           </button>
         )}
