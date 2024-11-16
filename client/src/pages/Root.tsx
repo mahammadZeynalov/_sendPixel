@@ -77,6 +77,11 @@ const Root = () => {
                 style={{ display: "flex", gap: "20px", alignItems: "center" }}
               >
                 <div>{address}</div>
+                {!isSubscribed && (
+                  <button className="btn btn-primary" onClick={handleSubscribe}>
+                    Subscribe to Push news 🔔
+                  </button>
+                )}
                 <button
                   className="btn btn-primary"
                   onClick={() => {
