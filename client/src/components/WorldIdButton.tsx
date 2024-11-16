@@ -1,5 +1,3 @@
-import * as React from "react";
-import { enqueueSnackbar } from "notistack";
 import {
   IDKitWidget,
   VerificationLevel,

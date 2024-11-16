@@ -7,11 +7,10 @@ import {
   notification,
   usePushNotifications,
 } from "../utils/usePushNotifications";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { CONSTANTS, PushAPI } from "@pushprotocol/restapi";
 import { groupChatId } from "../config";
 import { usePrivy, useLogout } from "@privy-io/react-auth";
+import { enqueueSnackbar } from "notistack";
 
 const Root = () => {
   const { address } = useAccount();
@@ -43,23 +42,10 @@ const Root = () => {
     setUser(user);
     setIsSubscribed(true);
     const stream = await user.initStream([CONSTANTS.STREAM.CHAT]);
-
-    stream.on(CONSTANTS.STREAM.CHAT, (message) => {
-      withReactContent(Swal).fire({
-        toast: true,
-        icon: "success",
-        title: `<div style="white-space: normal; word-wrap: break-word;">${message.message.content}</div>`, // Позволяет перенести текст
-        animation: false,
-        position: "top-right",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener("mouseenter", Swal.stopTimer);
-          toast.addEventListener("mouseleave", Swal.resumeTimer);
-        },
-        width: 500,
-      });
+    console.log("user: ", user);
+    stream.on(CONSTANTS.STREAM.CHAT, (data) => {
+      console.log("message: ", data);
+      enqueueSnackbar(data.message.content, { variant: "success" });
     });
     stream.connect();
     notification(user, `${address} has joined the chat.`);
