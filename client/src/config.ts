@@ -110,7 +110,7 @@ export const privyConfig: PrivyClientConfig = {
     walletChainType: "ethereum-only",
     walletList: ["detected_ethereum_wallets"],
   },
-  loginMethods: ["github", "discord", "linkedin", "wallet", "google"],
+  loginMethods: ["google", "github", "discord", "linkedin", "wallet"],
   fundingMethodConfig: {
     moonpay: {
       useSandbox: true,

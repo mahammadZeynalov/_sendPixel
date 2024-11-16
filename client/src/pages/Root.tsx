@@ -19,7 +19,13 @@ const Root = () => {
   const navigate = useNavigate();
   const signer = useEthersSigner();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { isSubscribed, setUser, setIsSubscribed } = usePushNotifications();
+  const {
+    isSubscribed,
+    setUser,
+    setIsSubscribed,
+    setIsSubscribtionLoading,
+    isSubscribtionLoading,
+  } = usePushNotifications();
   const handleLoginClick = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -35,21 +41,34 @@ const Root = () => {
   const { logout } = useLogout();
 
   const handleSubscribe = async () => {
-    const user = await PushAPI.initialize(signer, {
-      env: CONSTANTS.ENV.STAGING,
-    });
-    await user.chat.group.join(groupChatId);
-    setUser(user);
-    setIsSubscribed(true);
-    const stream = await user.initStream([CONSTANTS.STREAM.CHAT]);
-    console.log("user: ", user);
-    stream.on(CONSTANTS.STREAM.CHAT, (data) => {
-      console.log("message: ", data);
-      enqueueSnackbar(data.message.content, { variant: "success" });
-    });
-    stream.connect();
-    notification(user, `${address} has joined the chat.`);
+    setIsSubscribtionLoading(true);
+    try {
+      const user = await PushAPI.initialize(signer, {
+        env: CONSTANTS.ENV.STAGING,
+      });
+      await user.chat.group.join(groupChatId);
+      const stream = await user.initStream([CONSTANTS.STREAM.CHAT]);
+      stream.on(CONSTANTS.STREAM.CHAT, (data) => {
+        console.log("message: ", data);
+        const from = data.from.split(":")[1];
+        if (from !== address) {
+          enqueueSnackbar(data.message.content, { variant: "success" });
+        }
+      });
+      stream.connect();
+      setUser(user);
+      setIsSubscribed(true);
+      notification(user, `${address} has joined the chat.`);
+    } catch (e) {
+      enqueueSnackbar("Enable to join the chat", { variant: "error" });
+    } finally {
+      setIsSubscribtionLoading(false);
+    }
   };
+
+  useEffect(() => {
+    console.log("isSubscribed: ", isSubscribed);
+  }, [isSubscribed]);
 
   return (
     <div
@@ -71,8 +90,29 @@ const Root = () => {
               >
                 <div>{address}</div>
                 {!isSubscribed && (
-                  <button className="btn btn-primary" onClick={handleSubscribe}>
-                    Subscribe to Push news 🔔
+                  <button
+                    onClick={handleSubscribe}
+                    className="btn btn-primary"
+                    type="button"
+                    disabled={isSubscribtionLoading}
+                  >
+                    {isSubscribtionLoading ? (
+                      <>
+                        <span
+                          className="spinner-border spinner-border-sm"
+                          aria-hidden="true"
+                          style={{ marginRight: "10px" }}
+                        ></span>
+                        <span role="status">Joining...</span>
+                      </>
+                    ) : (
+                      <>🔔 Channel</>
+                    )}
+                  </button>
+                )}
+                {isSubscribed && (
+                  <button className="btn btn-success">
+                    🔔 Joined to channel!
                   </button>
                 )}
                 <button

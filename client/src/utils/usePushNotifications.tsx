@@ -4,8 +4,10 @@ import { groupChatId } from "../config";
 const initialContext = {
   user: null as any,
   isSubscribed: false,
-  setUser: (value: any) => {},
+  setUser: (user: any) => {},
   setIsSubscribed: (value: boolean) => {},
+  isSubscribtionLoading: false,
+  setIsSubscribtionLoading: (value: boolean) => {},
 };
 
 const PushNotificationsContext = createContext(initialContext);
@@ -13,10 +15,18 @@ const PushNotificationsContext = createContext(initialContext);
 export const PushNotificationsProvider = ({ children }) => {
   const [user, setUser] = useState<any>(null);
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [isSubscribtionLoading, setIsSubscribtionLoading] = useState(false);
 
   return (
     <PushNotificationsContext.Provider
-      value={{ user, isSubscribed, setUser, setIsSubscribed }}
+      value={{
+        user,
+        isSubscribed,
+        setUser,
+        setIsSubscribed,
+        isSubscribtionLoading,
+        setIsSubscribtionLoading,
+      }}
     >
       {children}
     </PushNotificationsContext.Provider>

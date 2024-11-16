@@ -67,7 +67,7 @@ const CanvasCards: React.FC<IProps> = ({ filterMode, selectedChainId }) => {
             isFunded,
           }) => (
             <CanvasCard
-              key={canvasId}
+              key={`${canvasId}-${name}-${owner}-${width}-${height}`}
               canvasId={canvasId}
               name={name}
               owner={owner}
