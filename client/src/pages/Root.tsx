@@ -52,7 +52,7 @@ const Root = () => {
         console.log("message: ", data);
         const from = data.from.split(":")[1];
         if (from !== address) {
-          enqueueSnackbar(data.message.content, { variant: "success" });
+          enqueueSnackbar(data?.message?.content, { variant: "success" });
         }
       });
       stream.connect();
