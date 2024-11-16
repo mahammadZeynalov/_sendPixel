@@ -26,12 +26,11 @@ const PixelsContainer = styled.div<PixelsContainerProps>`
 `;
 
 export interface PixelItem {
-  _id?: number; // ID using index as default
-  owner?: string | null; // Default owner is null or string if assigned
-  x: number; // X position based on index % width
-  y: number; // Y position based on Math.floor(index / width)
+  _id?: number;
+  owner?: string | null;
+  x: number;
+  y: number;
   color: {
-    // Color object with RGB values
     r: number;
     g: number;
     b: number;
@@ -39,15 +38,10 @@ export interface PixelItem {
 }
 
 const Canvas = () => {
-  const [canvas, setCanvas] = useState<ICanvas | null>(null);
-  const { data: hash, sendTransaction } = useSendTransaction();
-  const navigate = useNavigate();
-  const [activePixelId, setActivePixelId] = useState<number | null>(null);
-  const pixelsContainerRef = useRef<HTMLDivElement>(null);
-  const { user, isSubscribed } = usePushNotifications();
-
   const { canvasId: paramCanvasId } = useParams();
-  const [pixels, setPixels] = useState<PixelItem[]>([]);
+  const navigate = useNavigate();
+  const { user, isSubscribed } = usePushNotifications();
+  const { data: hash, sendTransaction } = useSendTransaction();
   const {
     isPending: isPendingCanvas,
     error: errorCanvas,
@@ -60,6 +54,11 @@ const Canvas = () => {
     // @ts-ignore
     3000
   );
+
+  const [canvas, setCanvas] = useState<ICanvas | null>(null);
+  const [activePixelId, setActivePixelId] = useState<number | null>(null);
+  const [pixels, setPixels] = useState<PixelItem[]>([]);
+  const pixelsContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (errorCanvas) {
@@ -93,7 +92,6 @@ const Canvas = () => {
     }
 
     return () => {
-      // Cleanup: Reset pixels to avoid stale state when navigating away
       setPixels([]);
     };
   }, [canvas]);
@@ -148,12 +146,13 @@ const Canvas = () => {
       to: canvas.canvasId as `0x${string}`,
       value: BigInt(result),
     });
-    {
-      isSubscribed &&
-        notification(
-          user,
-          `Wallet ${user.account} colored canvas "${canvas.name}" to R${r} G${g} B${b} color at coordinates ${x}:${y}`
-        );
+
+    // if user is subscribed to chat, send notification
+    if (isSubscribed) {
+      notification(
+        user,
+        `Wallet ${user.account} colored canvas "${canvas.name}" to R${r} G${g} B${b} color at coordinates ${x}:${y}`
+      );
     }
     return result;
   }
@@ -211,7 +210,6 @@ const Canvas = () => {
                 />
               ))}
             </PixelsContainer>
-            {/* Go Back button */}
             <div
               style={{
                 display: "flex",

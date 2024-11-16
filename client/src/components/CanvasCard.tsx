@@ -22,22 +22,21 @@ const CanvasCard = ({
   creationTime,
   isFunded,
 }) => {
-  const navigate = useNavigate(); // Initialize the useNavigate hook
+  const navigate = useNavigate();
   const { address, chainId: accountChainId } = useAccount();
-  const isOwner = address === owner;
-  const isBeneficiary = address === destination;
-  const [isExpired, setIsExpired] = useState(false);
-
-  const handleNavigate = () => {
-    // Navigate to the canvas route and pass the state
-    navigate(`/canvas/${canvasId}`);
-  };
-
   const {
     data: claimTokenData,
     isPending: isClaimTokenLoading,
     writeContractAsync,
   } = useWriteContract();
+
+  const [gradient, setGradient] = useState("");
+  const [isExpired, setIsExpired] = useState(false);
+  const [timeLeft, setTimeLeft] = useState({ minutes: 0, seconds: 0 });
+
+  const isOwner = address === owner;
+  const isBeneficiary = address === destination;
+  const isPlayable = !isExpired && !isFunded;
 
   // Handle canvas initialization (Step 1)
   const handleClaimTokens = () => {
@@ -54,6 +53,10 @@ const CanvasCard = ({
     }
   };
 
+  const handleNavigate = () => {
+    navigate(`/canvas/${canvasId}`);
+  };
+
   const claim = () => {
     writeContractAsync({
       abi: canvasContractAbi,
@@ -67,8 +70,6 @@ const CanvasCard = ({
       });
     });
   };
-
-  const [timeLeft, setTimeLeft] = useState({ minutes: 0, seconds: 0 });
 
   useEffect(() => {
     const expirationDate = add(new Date(creationTime * 1000), { hours: 1 });
@@ -92,9 +93,10 @@ const CanvasCard = ({
     return () => clearInterval(timerInterval);
   }, [creationTime]);
 
-  const isPlayable = !isExpired && !isFunded;
-
-  const [gradient, setGradient] = useState("");
+  useEffect(() => {
+    const initialGradient = getRandomGradient();
+    setGradient(initialGradient);
+  }, []);
 
   const getRandomColor = () => {
     const randomColor = Math.floor(Math.random() * 16777215).toString(16);
@@ -108,14 +110,8 @@ const CanvasCard = ({
     return `linear-gradient(135deg, ${color1}, ${color2}, ${color3})`;
   };
 
-  useEffect(() => {
-    const initialGradient = getRandomGradient();
-    setGradient(initialGradient);
-  }, []);
-
   return (
     <s.Card>
-      {/* Other card code */}
       <div
         style={{
           width: "100%",
@@ -123,13 +119,7 @@ const CanvasCard = ({
           overflow: "hidden",
           background: gradient,
         }}
-      >
-        {/* <img
-          src="https://via.placeholder.com/150"
-          alt="Canvas Placeholder"
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-        /> */}
-      </div>
+      ></div>
       <s.NameIdEditWrapper>
         <s.NameIdWrapper>
           <s.Name>{name}</s.Name>
