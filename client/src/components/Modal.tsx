@@ -66,7 +66,7 @@ const Input = styled.input`
 `;
 
 const Modal = ({ toggle }) => {
-  const { chainId: accountChainId } = useAccount();
+  const { chainId: accountChainId, address } = useAccount();
   const { user, isSubscribed } = usePushNotifications();
   const {
     writeAsync,
@@ -75,9 +75,11 @@ const Modal = ({ toggle }) => {
   } = useWrite();
 
   const [name, setName] = useState("");
-  const [height, setHeight] = useState(0);
-  const [width, setWidth] = useState(0);
-  const [destinationAddress, setDestinationAddress] = useState<string>("");
+  const [height, setHeight] = useState("");
+  const [width, setWidth] = useState("");
+  const [destinationAddress, setDestinationAddress] = useState<string>(
+    String(address)
+  );
 
   const isNetworkSupported = supportedChains.some(
     (chain) => chain.id === accountChainId
@@ -88,7 +90,7 @@ const Modal = ({ toggle }) => {
   const handleInitializeCanvas = async () => {
     const hash = await writeAsync(
       "deployCanvas",
-      [name, height, width, "", destinationAddress],
+      [name, Number(height), Number(width), "", destinationAddress],
       accountChainId as number
     );
     toggle();
@@ -147,6 +149,7 @@ const Modal = ({ toggle }) => {
         <InputContainer>
           <Label>Canvas Name</Label>
           <Input
+            placeholder="Enter name of the canvas"
             type="text"
             value={name}
             onChange={(event) => setName(event.target.value)}
@@ -155,17 +158,19 @@ const Modal = ({ toggle }) => {
         <InputContainer>
           <Label>Width</Label>
           <Input
+            placeholder="Enter width of the canvas"
             type="text"
             value={width}
-            onChange={(e) => setWidth(+e.target.value)}
+            onChange={(e) => setWidth(e.target.value)}
           />
         </InputContainer>
         <InputContainer>
           <Label>Height</Label>
           <Input
+            placeholder="Enter height of the canvas"
             type="text"
             value={height}
-            onChange={(e) => setHeight(+e.target.value)}
+            onChange={(e) => setHeight(e.target.value)}
           />
         </InputContainer>
         <InputContainer>

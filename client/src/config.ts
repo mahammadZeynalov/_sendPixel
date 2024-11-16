@@ -51,6 +51,74 @@ export const sepolia = /*#__PURE__*/ defineChain({
   },
 });
 
+export const celoAlfajores = /*#__PURE__*/ defineChain({
+  ...celoAlfajoresDefault,
+  rpcUrls: {
+    default: {
+      http: [`https://alfajores-forno.celo-testnet.org`],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Etherscan",
+      url: "https://sepolia.etherscan.io",
+      apiUrl: "https://api-sepolia.etherscan.io/api",
+      blockscoutUrl: "https://celo-alfajores.blockscout.com/",
+    },
+  },
+});
+
+export const baseSepolia = /*#__PURE__*/ defineChain({
+  ...baseSepoliaDefault,
+  rpcUrls: {
+    default: {
+      http: [`https://base-sepolia.g.alchemy.com/v2/${alchemyApiKey}`],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Etherscan",
+      url: "https://sepolia.etherscan.io",
+      apiUrl: "https://api-sepolia.etherscan.io/api",
+      blockscoutUrl: "https://base-sepolia.blockscout.com/",
+    },
+  },
+});
+
+export const lineaSepolia = /*#__PURE__*/ defineChain({
+  ...lineaSepoliaDefault,
+  rpcUrls: {
+    default: {
+      http: [`https://linea-sepolia.g.alchemy.com/v2/${alchemyApiKey}`],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Etherscan",
+      url: "https://sepolia.etherscan.io",
+      apiUrl: "https://api-sepolia.etherscan.io/api",
+      blockscoutUrl: "https://explorer.sepolia.linea.build/",
+    },
+  },
+});
+
+export const scrollSepolia = /*#__PURE__*/ defineChain({
+  ...scrollSepoliaDefault,
+  rpcUrls: {
+    default: {
+      http: [`https://scroll-sepolia.g.alchemy.com/v2/${alchemyApiKey}`],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Etherscan",
+      url: "https://sepolia.scrollscan.com/",
+      apiUrl: "https://api-sepolia.etherscan.io/api",
+      blockscoutUrl: "https://sepolia.scrollscan.com/",
+    },
+  },
+});
+
 export const supportedChains = [holesky, sepolia];
 const transports = supportedChains.reduce((acc, chain) => {
   acc[chain.id] = http();
