@@ -29,7 +29,7 @@ export const CardTitle = styled.p`
 export const CardNumericValue = styled.p`
   color: #1e1e1e;
   font-style: normal;
-  line-height: 120%; /* 28.8px */
+  line-height: 120%;
   letter-spacing: -0.48px;
   margin-bottom: 44px;
 `;
