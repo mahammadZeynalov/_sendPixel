@@ -10,4 +10,9 @@ router.get(
   canvasController.getGeneratedCanvases
 );
 
+router.get(
+  "/addresses/:walletAddress/canvases/joined",
+  canvasController.getJoinedCanvases
+);
+
 export default router;
