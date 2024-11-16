@@ -174,7 +174,11 @@ const CanvasCard = ({
           Claim tokens
         </button>
       )}
-      {isPlayable && <s.EnterBtn onClick={handleNavigate}>Enter</s.EnterBtn>}
+      {isPlayable && (
+        <button className="btn btn-primary" onClick={handleNavigate}>
+          Enter
+        </button>
+      )}
     </s.Card>
   );
 };

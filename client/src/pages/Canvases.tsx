@@ -51,11 +51,6 @@ const Canvases = () => {
         >
           Funded
         </s.Tab>
-        {address && (
-          <button className="btn btn-primary" onClick={toggleModal}>
-            Create New Canvas
-          </button>
-        )}
       </div>
       <s.SubTabsWrapper>
         {supportedChains.map((chain) => (
@@ -69,6 +64,14 @@ const Canvases = () => {
         ))}
       </s.SubTabsWrapper>
       <CanvasCards filterMode={filterMode} selectedChainId={selectedChainId} />
+      <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
+        {address && (
+          <button className="btn btn-primary" onClick={toggleModal}>
+            Create New Canvas
+          </button>
+        )}
+      </div>
+
       {showModal && <Modal toggle={toggleModal} />}
     </main>
   );
