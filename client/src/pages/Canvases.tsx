@@ -64,7 +64,10 @@ const Canvases = () => {
         ))}
       </s.SubTabsWrapper>
       <CanvasCards filterMode={filterMode} selectedChainId={selectedChainId} />
-      <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
+      <div
+        style={{ display: "flex", width: "100%", justifyContent: "center" }}
+        className="mt-4"
+      >
         {address && (
           <button className="btn btn-primary" onClick={toggleModal}>
             Create New Canvas
