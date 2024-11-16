@@ -125,7 +125,7 @@ const CanvasCard = ({
           <s.PropWrapper>
             <s.PropTitle>Expires in:</s.PropTitle>
             <s.PropValue>
-              {timeLeft.minutes}m {timeLeft.seconds}s
+              {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
             </s.PropValue>
           </s.PropWrapper>
         )}
@@ -149,7 +149,11 @@ const CanvasCard = ({
         isOwner && <WorldIdButton canvasId={canvasId}></WorldIdButton>
       )}
       {isBeneficiary && (
-        <button className="btn btn-warning" onClick={handleClaimTokens}>
+        <button
+          className="btn btn-warning"
+          onClick={handleClaimTokens}
+          disabled={!isExpired}
+        >
           Claim tokens
         </button>
       )}
