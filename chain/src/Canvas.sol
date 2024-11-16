@@ -18,10 +18,15 @@ contract Canvas {
     uint256 public creationTime;
 
     // Modifier to ensure the function runs only after 1 hour from creation
-    // modifier onlyAfterOneHour() {
-    //     require(block.timestamp >= creationTime + 1 hours, "Funds can only be transferred 1 hour after contract creation");
-    //     _;
-    // }
+    modifier onlyAfterSixHours() {
+        require(block.timestamp >= creationTime + 6 hours, "Funds can only be transferred 6 hours after contract creation");
+        _;
+    }
+
+    modifier onlyDestination() {
+        require(msg.sender == destination);
+        _;
+    }
 
     // Constructor to set the destination address and initialize creation time
     constructor(address _destination) {
@@ -35,8 +40,7 @@ contract Canvas {
     }
 
     // Function to transfer all funds to the destination after 1 hour
-    function transferFunds() external {
-        // MAKE IT: function transferFunds() external onlyAfterOneHour
+    function transferFunds() external onlyAfterSixHours onlyDestination {
         uint256 balance = address(this).balance;
         require(balance > 0, "No funds to transfer");
         payable(destination).transfer(balance);
