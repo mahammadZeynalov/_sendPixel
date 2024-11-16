@@ -23,7 +23,6 @@ export const Card = styled.div`
   padding: 20px;
   background: rgba(34, 34, 34, 0.6);
   max-width: 360px;
-  height: 500px;
   backdrop-filter: blur(100px);
 `;
 

@@ -88,7 +88,7 @@ const Root = () => {
               <div
                 style={{ display: "flex", gap: "20px", alignItems: "center" }}
               >
-                <div>{address}</div>
+                <div style={{ color: "white" }}>{address}</div>
                 {!isSubscribed && (
                   <button
                     onClick={handleSubscribe}

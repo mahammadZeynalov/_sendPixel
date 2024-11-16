@@ -93,33 +93,8 @@ const CanvasCard = ({
     return () => clearInterval(timerInterval);
   }, [creationTime]);
 
-  useEffect(() => {
-    const initialGradient = getRandomGradient();
-    setGradient(initialGradient);
-  }, []);
-
-  const getRandomColor = () => {
-    const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-    return `#${randomColor}`;
-  };
-
-  const getRandomGradient = () => {
-    const color1 = getRandomColor();
-    const color2 = getRandomColor();
-    const color3 = getRandomColor();
-    return `linear-gradient(135deg, ${color1}, ${color2}, ${color3})`;
-  };
-
   return (
     <s.Card>
-      <div
-        style={{
-          width: "100%",
-          height: "300px",
-          overflow: "hidden",
-          background: gradient,
-        }}
-      ></div>
       <s.NameIdEditWrapper>
         <s.NameIdWrapper>
           <s.Name>{name}</s.Name>
