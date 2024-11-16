@@ -2,6 +2,7 @@ import { http } from "@wagmi/core";
 import { createConfig } from "@wagmi/core";
 import Web3AuthConnectorInstance from "./Web3AuthConnectorInstance";
 import { defineChain } from "viem";
+import { PrivyClientConfig } from "@privy-io/react-auth";
 
 export const backendUrl: string = import.meta.env.VITE_PUBLIC_BACKEND_URL;
 const alchemyApiKey: string = import.meta.env.VITE_PUBLIC_ALCHEMY_API_KEY;
@@ -97,3 +98,29 @@ export const config = createConfig({
 });
 
 export const groupChatId = import.meta.env.VITE_PUBLIC_PUSH_GROUP_ADDRESS;
+
+export const privyAppID: string = import.meta.env.VITE_PUBLIC_PRIVY_APP_ID;
+
+export const privyConfig: PrivyClientConfig = {
+  appearance: {
+    accentColor: "#6A6FF5",
+    theme: "#FFFFFF",
+    showWalletLoginFirst: false,
+    logo: "https://auth.privy.io/logos/privy-logo.png",
+    walletChainType: "ethereum-only",
+    walletList: ["detected_ethereum_wallets"],
+  },
+  loginMethods: ["github", "discord", "linkedin", "wallet", "google"],
+  fundingMethodConfig: {
+    moonpay: {
+      useSandbox: true,
+    },
+  },
+  embeddedWallets: {
+    createOnLogin: "users-without-wallets",
+    requireUserPasswordOnCreate: false,
+  },
+  mfa: {
+    noPromptOnMfaRequired: false,
+  },
+};

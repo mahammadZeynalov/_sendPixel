@@ -4,19 +4,22 @@ import App from "./App.jsx";
 import "./index.css";
 import { WagmiProvider } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { config } from "./config";
 import { SnackbarProvider } from "notistack";
+import { PrivyProvider } from "@privy-io/react-auth";
+import { config, privyAppID, privyConfig } from "./config";
 
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <WagmiProvider config={config}>
-        <SnackbarProvider>
-          <App />
-        </SnackbarProvider>
-      </WagmiProvider>
-    </QueryClientProvider>
+    <PrivyProvider appId={privyAppID} config={privyConfig}>
+      <QueryClientProvider client={queryClient}>
+        <WagmiProvider config={config}>
+          <SnackbarProvider>
+            <App />
+          </SnackbarProvider>
+        </WagmiProvider>
+      </QueryClientProvider>
+    </PrivyProvider>
   </StrictMode>
 );

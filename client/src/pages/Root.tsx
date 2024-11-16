@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { CONSTANTS, PushAPI } from "@pushprotocol/restapi";
 import { groupChatId } from "../config";
+import { usePrivy, useLogout } from "@privy-io/react-auth";
 
 const Root = () => {
   const { address } = useAccount();
@@ -30,6 +31,9 @@ const Root = () => {
       navigate("/");
     }
   }, [address, navigate]);
+
+  const { login } = usePrivy();
+  const { logout } = useLogout();
 
   const handleSubscribe = async () => {
     const user = await PushAPI.initialize(signer, {
@@ -86,6 +90,7 @@ const Root = () => {
                   className="btn btn-primary"
                   onClick={() => {
                     disconnect();
+                    logout();
                   }}
                 >
                   Disconnect
@@ -138,10 +143,7 @@ const Root = () => {
                   {connector.name}
                 </button>
               ))}
-              <button
-                className="btn btn-primary"
-                onClick={() => console.log("login")}
-              >
+              <button className="btn btn-primary" onClick={login}>
                 Privy
               </button>
             </div>
