@@ -1,22 +1,23 @@
 import express from "express";
 import canvasController from "../controllers/canvasController.js";
+import Canvas from "../models/canvasModel.js";
+import worldIdController from "../controllers/worldIdController.js";
 
 const router = express.Router();
 
 router.get("/canvases", canvasController.getAllCanvases);
-
 router.get(
   "/addresses/:walletAddress/canvases/generated",
   canvasController.getGeneratedCanvases
 );
-
 router.get(
   "/addresses/:walletAddress/canvases/joined",
   canvasController.getJoinedCanvases
 );
-
 router.get("/canvases/:canvasId", canvasController.getCanvas);
-
+router.get("/test", (_, res) => {
+  res.status(200).json({ message: "Bye World!" });
+});
 router.get("/test-insert", async (_, res) => {
   const newCanvas = new Canvas({
     canvasId: "canvas123",
@@ -71,9 +72,6 @@ router.get("/test-insert", async (_, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
-router.get("/test", (_, res) => {
-  res.status(200).json({ message: "Bye World!" });
-});
+router.post("/world-id-verify", worldIdController.initVerification);
 
 export default router;
