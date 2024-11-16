@@ -26,64 +26,67 @@ const Canvases = () => {
 
   return (
     <main className="page-container">
-      <div className="tabs-wrapper mb-3">
-        <s.Tab
-          onClick={() => setFilterMode(FilterMode.ALL)}
-          $active={filterMode === FilterMode.ALL}
-        >
-          All
-        </s.Tab>
-        <s.Tab
-          onClick={() => setFilterMode(FilterMode.OWNED)}
-          $active={filterMode === FilterMode.OWNED}
-        >
-          Owned
-        </s.Tab>
-        <s.Tab
-          onClick={() => setFilterMode(FilterMode.JOINED)}
-          $active={filterMode === FilterMode.JOINED}
-        >
-          Joined
-        </s.Tab>
-        <s.Tab
-          onClick={() => setFilterMode(FilterMode.FUNDED)}
-          $active={filterMode === FilterMode.FUNDED}
-        >
-          Funded
-        </s.Tab>
-      </div>
-      <s.SubTabsWrapper>
-        {supportedChains.map((chain) => (
-          <s.SubTab
-            key={chain.id}
-            onClick={() => setSelectedChainId(chain.id)}
-            $active={selectedChainId === chain.id}
+      <div>
+        <div className="tabs-wrapper mb-3">
+          <s.Tab
+            onClick={() => setFilterMode(FilterMode.ALL)}
+            $active={filterMode === FilterMode.ALL}
           >
-            {chain.name}
-          </s.SubTab>
-        ))}
-      </s.SubTabsWrapper>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-        }}
-      >
-        <CanvasCards
-          filterMode={filterMode}
-          selectedChainId={selectedChainId}
-        />
-        <div
-          style={{ display: "flex", width: "100%", justifyContent: "center" }}
-          className="mt-4"
-        >
-          {address && (
-            <button className="btn btn-warning" onClick={toggleModal}>
-              Create New Canvas
-            </button>
-          )}
+            All
+          </s.Tab>
+          <s.Tab
+            onClick={() => setFilterMode(FilterMode.OWNED)}
+            $active={filterMode === FilterMode.OWNED}
+          >
+            Owned
+          </s.Tab>
+          <s.Tab
+            onClick={() => setFilterMode(FilterMode.JOINED)}
+            $active={filterMode === FilterMode.JOINED}
+          >
+            Joined
+          </s.Tab>
+          <s.Tab
+            onClick={() => setFilterMode(FilterMode.FUNDED)}
+            $active={filterMode === FilterMode.FUNDED}
+          >
+            Funded
+          </s.Tab>
         </div>
+        <s.SubTabsWrapper>
+          {supportedChains.map((chain) => (
+            <s.SubTab
+              key={chain.id}
+              onClick={() => setSelectedChainId(chain.id)}
+              $active={selectedChainId === chain.id}
+            >
+              {chain.name}
+            </s.SubTab>
+          ))}
+        </s.SubTabsWrapper>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
+          <CanvasCards
+            filterMode={filterMode}
+            selectedChainId={selectedChainId}
+          />
+        </div>
+      </div>
+
+      <div
+        style={{ display: "flex", width: "100%", justifyContent: "center" }}
+        className="mt-4"
+      >
+        {address && (
+          <button className="btn btn-warning" onClick={toggleModal}>
+            Create New Canvas
+          </button>
+        )}
       </div>
 
       {showModal && <Modal toggle={toggleModal} />}

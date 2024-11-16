@@ -161,11 +161,8 @@ const Modal = ({ toggle }) => {
     gasPricesData.forEach((data) => {
       gasPricesMap.set(data.chainId, formatEther(data.price));
     });
-    console.log("gasPricesMap", gasPricesMap);
     return gasPricesMap;
   };
-
-  console.log("gasPricesMap", gasPricesMap);
 
   return (
     <Overlay onClick={toggle}>
