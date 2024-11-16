@@ -4,6 +4,7 @@ import cors from "cors";
 import routes from "./routes/routes.js";
 import mongoose from "mongoose";
 import Canvas from "./models/canvasModel.js";
+import BlockSync from "./models/blockSyncModel.js";
 import watcherService from "./services/watcherService.js";
 
 dotenv.config({ path: "./.env" });
@@ -25,7 +26,7 @@ mongoose
     console.log("DB connection successful!");
     // Clear the Canvas collection on startup
     await Canvas.deleteMany({});
-
+    await BlockSync.deleteMany({});
     console.log("Canvas collection cleared");
 
     // Start event listeners
