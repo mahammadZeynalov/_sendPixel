@@ -9,8 +9,19 @@ const getAllCanvases = async (_, res) => {
   }
 };
 
+const getGeneratedCanvases = async (req, res) => {
+  try {
+    const { walletAddress } = req.params;
+    const canvases = await canvasService.getGeneratedCanvases(walletAddress);
+    res.status(200).json(canvases);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 const canvasController = {
   getAllCanvases,
+  getGeneratedCanvases,
 };
 
 export default canvasController;
