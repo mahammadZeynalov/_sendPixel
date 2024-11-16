@@ -3,6 +3,14 @@ import { Outlet, useNavigate } from "react-router";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import * as s from "./RootStyles";
 import { useEthersSigner } from "../hooks/useEtherSigner";
+import {
+  notification,
+  usePushNotifications,
+} from "../utils/usePushNotifications";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { CONSTANTS, PushAPI } from "@pushprotocol/restapi";
+import { groupChatId } from "../config";
 
 const Root = () => {
   const { address } = useAccount();
@@ -11,6 +19,7 @@ const Root = () => {
   const navigate = useNavigate();
   const signer = useEthersSigner();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isSubscribed, setUser, setIsSubscribed } = usePushNotifications();
   const handleLoginClick = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -21,6 +30,36 @@ const Root = () => {
       navigate("/");
     }
   }, [address, navigate]);
+
+  const handleSubscribe = async () => {
+    const user = await PushAPI.initialize(signer, {
+      env: CONSTANTS.ENV.STAGING,
+    });
+    await user.chat.group.join(groupChatId);
+    setUser(user);
+    setIsSubscribed(true);
+    const stream = await user.initStream([CONSTANTS.STREAM.CHAT]);
+
+    stream.on(CONSTANTS.STREAM.CHAT, (message) => {
+      withReactContent(Swal).fire({
+        toast: true,
+        icon: "success",
+        title: `<div style="white-space: normal; word-wrap: break-word;">${message.message.content}</div>`, // Позволяет перенести текст
+        animation: false,
+        position: "top-right",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+        width: 500,
+      });
+    });
+    stream.connect();
+    notification(user, `${address} has joined the chat.`);
+  };
 
   return (
     <div className="container">

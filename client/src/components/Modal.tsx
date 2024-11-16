@@ -5,6 +5,10 @@ import { enqueueSnackbar } from "notistack";
 import { switchChain } from "@wagmi/core";
 import { config, supportedChains } from "../config";
 import { useAccount } from "wagmi";
+import {
+  notification,
+  usePushNotifications,
+} from "../utils/usePushNotifications";
 
 const Overlay = styled.div`
   position: fixed;
@@ -67,6 +71,7 @@ const Modal = ({ toggle }) => {
   const [width, setWidth] = useState(0);
   const [destinationAddress, setDestinationAddress] = useState<string>("");
   const { chainId: accountChainId } = useAccount();
+  const { user, isSubscribed } = usePushNotifications();
 
   const {
     writeAsync,
@@ -83,13 +88,13 @@ const Modal = ({ toggle }) => {
     );
     toggle();
 
-    // {
-    //   isSubscribed &&
-    //     notification(
-    //       user,
-    //       `Wallet ${user.account} created "${name}" (${width}x${height})`
-    //     );
-    // }
+    {
+      isSubscribed &&
+        notification(
+          user,
+          `Wallet ${user.account} created "${name}" (${width}x${height})`
+        );
+    }
 
     const chain = supportedChains.find(
       (chain) => chain.id === accountChainId!
