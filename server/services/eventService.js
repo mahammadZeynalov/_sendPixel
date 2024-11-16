@@ -56,6 +56,18 @@ const handleRegisterPixel = async (log) => {
   }
 };
 
+const handleFundsTransferred = async (log) => {
+  try {
+    const data = {
+      canvasId: log.args.contractAddress,
+      amount: log.args.amount.toString().padStart(18, "0"), // Ensure 18 digits,
+    };
+    await canvasService.transferFunds(data);
+  } catch (error) {
+    console.error("Error in handleRegisterPixel:", error.message);
+  }
+};
+
 const eventService = {
   handleInitializeCanvas,
   handleRegisterPixel,
