@@ -119,7 +119,11 @@ const Root = () => {
                   className="btn btn-primary"
                   onClick={() => {
                     disconnect();
-                    logout();
+                    try {
+                      logout();
+                    } catch (e) {
+                      console.log("Error: ", e);
+                    }
                   }}
                 >
                   Disconnect
