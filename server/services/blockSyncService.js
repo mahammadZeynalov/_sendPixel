@@ -1,8 +1,7 @@
 import BlockSync from "../models/blockSyncModel.js";
 
-// Update to include logIndex and contractAddress
 const updateLastProcessedEvent = async ({
-  contractAddress, // Add contractAddress
+  contractAddress,
   blockNumber,
   transactionHash,
   logIndex,
