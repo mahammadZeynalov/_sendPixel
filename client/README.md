@@ -25,17 +25,16 @@ To maximize inclusivity and engagement, _sendPixel is deployed across multiple b
 ## 💰 Sponsors
 
 - **Scroll**: 💡 Innovate on Scroll ⸺ $10,000
-  - Address of the `CanvasDeployer`: `0x2CdD0E57D3609Dc93047794409Ab2f9aAAfA4E4D`
-  - `CanvasDeployer` deploys `Canvas` contracts on users' demands
+  - Address of the `CanvasDeployer`: [0x2CdD0E57D3609Dc93047794409Ab2f9aAAfA4E4D](https://sepolia.scrollscan.com/address/0x2CdD0E57D3609Dc93047794409Ab2f9aAAfA4E4D)
+  - Example Canvas contract: [0x11276e5dBf136194E28f9f3f111FA33294ff151c](https://sepolia.scrollscan.com/address/0x11276e5dBf136194E28f9f3f111FA33294ff151c)
 - **Base**: 🔵 Most Based Award ⸺ $5,000
-  - Contract address: `0x155bc4207709a0a7bfbddd47c260b3f40afd464c`
-  - `CanvasDeployer` deploys `Canvas` contracts on users' demands
+  - Address of the `CanvasDeployer`: [0x155bC4207709A0A7BFbDDD47C260B3f40aFD464c](https://base-sepolia.blockscout.com/address/0x155bC4207709A0A7BFbDDD47C260B3f40aFD464c)
+  - Example Canvas contract: [0xCe72CF93667Ba644c5C559b21F0d803b419f0B8f](https://base-sepolia.blockscout.com/address/0xCe72CF93667Ba644c5C559b21F0d803b419f0B8f)
 - **Linea**: 🦊 Best Project Deployed on Linea and MetaMask JSON-RPC API (Recommended) ⸺ $5,000
-  - Contract address: `0x2CdD0E57D3609Dc93047794409Ab2f9aAAfA4E4D`
-  - `CanvasDeployer` deploys `Canvas` contracts on users' demands
+  - Address of the `CanvasDeployer`: [0x2CdD0E57D3609Dc93047794409Ab2f9aAAfA4E4D](https://explorer.sepolia.linea.build/address/0x2CdD0E57D3609Dc93047794409Ab2f9aAAfA4E4D)
 - **Morph**: 🐨 Best Consumer Applications build on Morph ⸺ $5,000
-  - Contract address: `0x155bc4207709a0a7bfbddd47c260b3f40afd464c`
-  - `CanvasDeployer` deploys `Canvas` contracts on users' demands
+  - Address of the `CanvasDeployer`: [0x155bC4207709A0A7BFbDDD47C260B3f40aFD464c](https://explorer-holesky.morphl2.io/address/0x155bC4207709A0A7BFbDDD47C260B3f40aFD464c)
+  - Example Canvas contract: [0xb2111400c7B8097094CaD6e613D8Ca0462B83B93](https://explorer-holesky.morphl2.io/address/0xb2111400c7B8097094CaD6e613D8Ca0462B83B93)
 - **NounsDao**: 🏗️ Best public good built with Nouns ⸺ $3,500
 - **NounsDao**: 🖥️ Best application built with Nouns ⸺ $1,500
 - **Privy**: 🥇 Best consumer app ⸺ $2,000
