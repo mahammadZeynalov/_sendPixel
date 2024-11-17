@@ -38,6 +38,7 @@ To maximize inclusivity and engagement, _sendPixel is deployed across multiple b
   - `CanvasDeployer` deploys `Canvas` contracts on users' demands
 - **NounsDao**: 🏗️ Best public good built with Nouns ⸺ $3,500
 - **NounsDao**: 🖥️ Best application built with Nouns ⸺ $1,500
+- **Push Protocol**: 🖥️ Thai Street Food - Creative Bounty ⸺ $2,500
 - **Privy**: 🥇 Best consumer app ⸺ $2,000
 - **Privy**: 💌 Using Privy ⸺ $1,500
 - **Web3Auth**: ⚡️ Best Use of Web3Auth Plug and Play Web SDKs ⸺ $1,500
