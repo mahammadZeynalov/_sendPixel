@@ -25,8 +25,8 @@ mongoose
   .then(async () => {
     console.log("DB connection successful!");
     // Clear the Canvas collection on startup
-    await Canvas.deleteMany({});
-    await BlockSync.deleteMany({});
+    // await Canvas.deleteMany({});
+    // await BlockSync.deleteMany({});
     console.log("Canvas collection cleared");
 
     // Start event listeners
